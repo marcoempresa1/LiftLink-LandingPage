@@ -1,12 +1,96 @@
 ---
-const H1Text = "El Soundtrack de tu Villain Arc."
-const HeroText = "Extrae, organiza y ecualiza audios underground para tus entrenamientos. Sin conexión, sin anuncios, cero distracciones. Construido exclusivamente para el hierro."
+import HeroImage from "@/assets/images/robot.png";
+import { Image } from "astro:assets";
+import Noise from "@/components/Noise";
+
+const H1Text = "Tu Musica. Tu Entrenamiento";
+const HeroText =
+  "Extrae, organiza y ecualiza audios underground para tus entrenamientos. Sin conexión, sin anuncios, cero distracciones. Construido exclusivamente para el hierro.";
 ---
 
-
-
-<div class="hero">
-  <div class="hero-content">
-    <h1>{H1Text}</h1>
-    <p>{HeroText}</p>
+<div
+  class="hero relative flex min-h-screen overflow-hidden bg-black"
+  id="hero-section"
+>
+  <div
+    class="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-50 md:opacity-100"
+  >
+    <Noise
+      patternSize={250}
+      patternScaleX={2}
+      patternScaleY={2}
+      patternRefreshInterval={2}
+      patternAlpha={15}
+      client:load
+    />
   </div>
+
+  <Image
+    src={HeroImage}
+    alt="LiftLink Hero Image"
+    width={1000}
+    format="webp"
+    quality={100}
+    class="hero-image absolute bottom-0 left-1/2 z-0 h-[65vh] w-auto -translate-x-1/2 object-contain md:bottom-3 md:h-[100vh] opacity-0"
+  />
+
+  <div
+    class="relative z-10 grid w-full grid-cols-1 items-start pt-32 pb-12 gap-8 px-6 text-white md:grid-cols-2 md:items-end md:pt-0 md:px-12 md:pb-33"
+  >
+    <h1
+      class="font-display text-[10vw] sm:text-4xl md:text-4xl lg:text-6xl uppercase leading-[0.85] tracking-tighter text-white flex flex-wrap gap-x-3 gap-y-1"
+    >
+      {
+        H1Text.split(" ").map((word) => (
+          <span class="overflow-hidden inline-flex pb-1">
+            <span class="title-word inline-block origin-top-left">{word}</span>
+          </span>
+        ))
+      }
+    </h1>
+
+    <div
+      class="hero-text-wrapper overflow-hidden max-w-2xl justify-self-start md:justify-self-end md:translate-x-8"
+    >
+      <p
+        class="hero-text font-display text-gray-300 text-base md:text-xl leading-snug"
+      >
+        <strong class="text-white font-satoshi font-medium"
+          >Extrae, organiza y ecualiza audios underground para tus
+          entrenamientos.</strong
+        > Sin conexión, sin anuncios, cero distracciones. Construido exclusivamente
+        para el hierro.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Usamos power4.out para un efecto dramático y elegante tipo Awwwards
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+    // Animación de la imagen central (brazo robótico) emergiendo
+    tl.fromTo(
+      ".hero-image",
+      { y: 150, opacity: 0, scale: 0.95 },
+      { y: 0, opacity: 1, scale: 1, duration: 2, delay: 0.1 },
+    )
+      // Título: Awwwards style mask reveal con rotación y escala por palabra
+      .fromTo(
+        ".title-word",
+        { y: "130%", rotationZ: 8, scale: 0.85 },
+        { y: "0%", rotationZ: 0, scale: 1, duration: 1.4, stagger: 0.15 },
+        "-=1.6", // Comienza mientras el brazo apenas está subiendo
+      )
+      // Texto descriptivo: Entra de forma elegante sin blur para no dropear FPS
+      .fromTo(
+        ".hero-text",
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.5 },
+        "-=1.2",
+      );
+  });
+</script>

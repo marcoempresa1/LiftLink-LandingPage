@@ -1,0 +1,61 @@
+---
+import {Image} from 'astro:assets';
+import Logo from '@/assets/images/header.png';
+import Noise from '@/components/Noise'
+
+---
+
+
+
+
+
+
+
+<header class="header">
+      <div class="pointer-events-none absolute inset-0 z-0">
+    <Noise
+      patternSize={250}
+      patternScaleX={2}
+      patternScaleY={2}
+      patternRefreshInterval={2}
+      patternAlpha={15}
+      client:load
+    />
+  </div>
+  <nav class="mx-auto flex max-w-7xl items-center font-satoshi justify-between px-6 py-6  uppercase text-white md:px-12  ">
+    
+<Image
+src={Logo}
+alt="LiftLink Logo" 
+width={140}
+format="png"
+quality="highest"
+class="w-[120px] md:w-[140px]"
+/>
+    <ul class="flex items-center gap-3 text-sm font-medium md:text-base">
+  <li>
+    <a
+      href="/"
+      class="group flex items-center gap-3 rounded-full bg-white py-2 pl-5 pr-2 text-black transition hover:bg-gray-200"
+    >
+      Desarrollador
+      <span class="flex h-8 w-8 items-center justify-center rounded-full bg-black text-lg text-white transition-transform group-hover:rotate-45">
+        ↗
+      </span>
+    </a>
+  </li>
+
+  <li>
+    <a
+      href="/"
+      class="group flex items-center gap-3 rounded-full bg-white py-2 pl-5 pr-2 text-black transition hover:bg-gray-200"
+    >
+      Contacto
+      <span class="flex h-8 w-8 items-center justify-center rounded-full bg-black text-lg text-white transition-transform group-hover:rotate-45">
+        ↗
+      </span>
+    </a>
+  </li>
+</ul>
+  </nav>
+</header>
