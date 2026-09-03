@@ -31,14 +31,14 @@ const HeroText =
     width={1000}
     format="webp"
     quality={100}
-    class="hero-image absolute bottom-0 left-1/2 z-0 h-[65vh] w-auto -translate-x-1/2 object-contain md:bottom-3 md:h-[100vh] opacity-0"
+    class="hero-image absolute bottom-0 md:-bottom-8 left-1/2 z-0 w-[140%] xl:w-[120%] max-w-none md:w-auto h-auto md:h-[100vh] lg:h-[55vh] xl:h-[90vh] -translate-x-1/2 object-contain opacity-0 translate-y-10 md:translate-y-24"
   />
 
   <div
-    class="relative z-10 grid w-full grid-cols-1 items-start pt-32 pb-12 gap-8 px-6 text-white md:grid-cols-2 md:items-end md:pt-0 md:px-12 md:pb-33"
+    class="relative z-10 grid w-full grid-cols-1 items-start pt-8 md:pt-0 pb-30 sm:pb-16 md:pb-12 lg:pb-8 xl:pb-12 gap-2 md:gap-8 px-6 text-white md:grid-cols-2 md:items-end md:px-12 mt-auto"
   >
     <h1
-      class="font-display text-[10vw] sm:text-4xl md:text-4xl lg:text-6xl uppercase leading-[0.85] tracking-tighter text-white flex flex-wrap gap-x-3 gap-y-1"
+      class="font-display text-4xl sm:text-7xl md:text-4xl lg:text-4xl xl:text-5xl uppercase leading-[0.85] tracking-tighter text-white flex flex-wrap gap-x-3 gap-y-1"
     >
       {
         H1Text.split(" ").map((word) => (
@@ -50,10 +50,10 @@ const HeroText =
     </h1>
 
     <div
-      class="hero-text-wrapper overflow-hidden max-w-2xl justify-self-start md:justify-self-end md:translate-x-8"
+      class="hero-text-wrapper overflow-hidden max-w-2xl justify-self-start md:justify-self-end md:translate-x-8 lg:translate-x-16 xl:translate-x-24"
     >
       <p
-        class="hero-text font-display text-gray-300 text-base md:text-xl leading-snug"
+        class="hero-text font-display text-gray-300 text-base sm:text-base md:text-lg lg:text-base xl:text-lg leading-snug mt-2 md:mt-0"
       >
         <strong class="text-white font-satoshi font-medium"
           >Extrae, organiza y ecualiza audios underground para tus

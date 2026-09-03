@@ -1,0 +1,63 @@
+---
+
+---
+
+<div
+  id="global-preloader"
+  class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700"
+>
+  <div
+    class="relative w-64 md:w-96 h-[4px] bg-white/10 overflow-hidden rounded-full"
+  >
+    <div
+      id="preloader-bar"
+      class="absolute top-0 left-0 h-full w-0 bg-white rounded-full"
+    >
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Forzar siempre cargar al inicio de la página para no romper animaciones
+    if (history.scrollRestoration) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+
+    const preloader = document.getElementById("global-preloader");
+    const preloaderBar = document.getElementById("preloader-bar");
+
+    if (!preloader || !preloaderBar) return;
+
+    let progress = 0;
+
+    const progressInterval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress > 90) progress = 90;
+
+      gsap.to(preloaderBar, {
+        width: `${progress}%`,
+        duration: 0.2,
+        ease: "power1.out",
+      });
+    }, 100);
+
+    window.addEventListener("load", () => {
+      clearInterval(progressInterval);
+
+      const tl = gsap.timeline();
+
+      tl.to(preloaderBar, {
+        width: "100%",
+        duration: 0.4,
+        ease: "power2.inOut",
+      })
+        .to(preloaderBar, { opacity: 0, duration: 0.3 }, "+=0.1")
+        .to(preloader, { yPercent: -100, duration: 0.8, ease: "power3.inOut" })
+        .set(preloader, { display: "none" });
+    });
+  });
+</script>
