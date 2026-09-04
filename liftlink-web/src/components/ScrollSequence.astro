@@ -6,10 +6,10 @@ import { Image } from "astro:assets";
 
 <section
   id="scroll-sequence-wrapper"
-  class="relative w-full bg-[#000000] h-[150vh] md:h-[300vh] -mt-[15vh] z-20"
+  class="relative w-full bg-[#000000] h-auto md:h-[300vh] -mt-[5vh] md:-mt-[15vh] z-20"
 >
   <div
-    class="sticky top-0 w-full h-screen overflow-hidden px-6 md:px-12 pt-10 md:pt-0"
+    class="relative md:sticky top-0 w-full h-auto md:h-screen overflow-hidden px-6 md:px-12 py-20 md:pt-0"
   >
     <!-- Inner Wrapper to translate up on mobile -->
     <div class="sequence-inner-wrapper w-full h-full flex flex-col md:flex-row items-center justify-start md:justify-center">
@@ -44,7 +44,7 @@ import { Image } from "astro:assets";
 
       <!-- Text Block (Hidden initially on desktop, static on mobile) -->
       <div
-        class="sequence-text-block relative md:absolute mt-8 md:mt-0 right-auto md:right-8 lg:right-20 w-full max-w-sm md:max-w-lg lg:max-w-2xl opacity-100 translate-x-0 md:opacity-0 md:translate-x-12 z-10 block"
+        class="sequence-text-block block relative md:absolute mt-8 md:mt-0 right-auto md:right-8 lg:right-20 w-full max-w-sm md:max-w-lg lg:max-w-2xl opacity-100 translate-x-0 md:opacity-0 md:translate-x-12 z-10"
       >
         <div
           class="sequence-reveal-item opacity-100 md:opacity-20 mb-6 border-b border-white/10 pb-4"
@@ -197,23 +197,16 @@ import { Image } from "astro:assets";
     });
 
     mm.add("(max-width: 767px)", () => {
-      const tl = gsap.timeline({
+      // Sin animación de scroll, solo un pequeño fade-in cuando el celular entra en vista
+      gsap.to(".nolineart-image", {
         scrollTrigger: {
-          trigger: "#scroll-sequence-wrapper",
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1, // Suavizado restaurado para que no se vea errático
+          trigger: ".sequence-image-container",
+          start: "top 75%",
         },
+        opacity: 1,
+        duration: 1.5,
+        ease: "power2.out",
       });
-      
-      // Movemos todo el contenedor hacia arriba para que nada quede cortado
-      tl.to(".sequence-inner-wrapper", { y: "-45%", duration: 8, ease: "none" }, 0);
-
-      // Frame 0: Pausa (dummy) de 1 segundo al inicio del scroll
-      tl.to({}, { duration: 1 }, 0)
-        // Animaciones comienzan en el segundo 1 (solo la imagen en móvil)
-        .to(".nolineart-image", { opacity: 1, duration: 2 }, 1)
-        .to(".sequence-image-container", { scale: 1.05, duration: 2 }, 1);
     });
   });
 </script>

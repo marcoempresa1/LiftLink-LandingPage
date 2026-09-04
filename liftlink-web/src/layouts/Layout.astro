@@ -8,8 +8,7 @@ import Preloader from "@/components/Preloader.astro";
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/favicon-16x16.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>LiftLink</title>
 	</head>
@@ -22,30 +21,30 @@ import Preloader from "@/components/Preloader.astro";
 </html>
 
 <script>
-  import Lenis from 'lenis';
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+	import Lenis from "lenis";
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
+	gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar Lenis para scroll fluido y reactivo
-    const lenis = new Lenis({
-      lerp: 0.1, // 0.1 es el estándar de Lenis para 60fps/120fps (0.05 era muy lento y causa ghosting)
-      wheelMultiplier: 1, // Multiplicador normal para evitar "saltos"
-      syncTouch: false, // Desactivado: Interferir con el touch nativo de los celulares causa una sensación de "fricción pesada"
-    });
+	document.addEventListener("DOMContentLoaded", () => {
+		// Inicializar Lenis para scroll fluido y reactivo
+		const lenis = new Lenis({
+			lerp: 0.1, // 0.1 es el estándar de Lenis para 60fps/120fps (0.05 era muy lento y causa ghosting)
+			wheelMultiplier: 1, // Multiplicador normal para evitar "saltos"
+			syncTouch: false, // Desactivado: Interferir con el touch nativo de los celulares causa una sensación de "fricción pesada"
+		});
 
-    // Sincronizar Lenis con GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
+		// Sincronizar Lenis con GSAP ScrollTrigger
+		lenis.on("scroll", ScrollTrigger.update);
 
-    // Conectar RAF de GSAP con Lenis (Método oficial 100% fluido)
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+		// Conectar RAF de GSAP con Lenis (Método oficial 100% fluido)
+		gsap.ticker.add((time) => {
+			lenis.raf(time * 1000);
+		});
 
-    gsap.ticker.lagSmoothing(0);
-  });
+		gsap.ticker.lagSmoothing(0);
+	});
 </script>
 
 <style>
